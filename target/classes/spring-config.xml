@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="helloWorld" class="com.privalia.presentation.HelloWorld">
+		<property name="hello" value="¡HolaMuno!"></property>
+	</bean>
+	
+	<bean id="helloWorldConst" class="com.privalia.presentation.HelloWorld">
+		<constructor-arg index="0" value="Hola Mundo From Constructor!" type="java.lang.String" />
+	</bean>
+	
+	<bean id="studentSetter" class="com.privalia.entity.Student">
+		<property name="name" value="Albert"></property>
+		<property name="surname" value="F"></property>
+		<property name="age" value="33"></property>
+	</bean>
+	
+	<bean id="studentConst" class="com.privalia.entity.Student">
+		<constructor-arg index="0" value="Albert" type="java.lang.String"/>
+		<constructor-arg index="1" value="Ferriz" type="java.lang.String"/>
+		<constructor-arg index="2" value="33" type="java.lang.Integer"/>
+	</bean>
+	
+</beans>
