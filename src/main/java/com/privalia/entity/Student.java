@@ -5,6 +5,7 @@ public class Student {
 	protected String name;
 	protected String surname;
 	protected int age;
+	protected Address address;
 	
 	public Student(){}
 	
@@ -55,7 +56,19 @@ public class Student {
 	public void setAge(int age) {
 		this.age = age;
 	}
-	
-	
+
+	/**
+	 * @return the addres
+	 */
+	public Address getAddress() {
+		return address;
+	}
+
+	/**
+	 * @param addres the addres to set
+	 */
+	public void setAddress(Address addres) {
+		this.address = addres;
+	}
 
 }

@@ -10,9 +10,6 @@ public class Principal {
 		
 		AbstractApplicationContext context = new ClassPathXmlApplicationContext("spring-config.xml");
 		
-		context.scan("com.privalia.presentation.annotations2");
-		context.refresh();
-		
 		Student student1 = (Student) context.getBean("studentSetter");
 		System.out.println(student1.getName());
 		
