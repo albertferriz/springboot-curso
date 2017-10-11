@@ -1,4 +1,4 @@
-package com.privalia.entity;
+package com.privalia.entity.annotations;
 
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -9,9 +9,13 @@ public class Principal {
 
 	public static void main(String[] args) {
 		
-		AbstractApplicationContext context = new ClassPathXmlApplicationContext("spring-config.xml");
+		AnnotationConfigApplicationContext annotationContext = 
+				new AnnotationConfigApplicationContext();
 		
-		Student student1 = (Student) context.getBean("studentSetter");
+		annotationContext.scan("com.privalia.entity.annotations");
+		annotationContext.refresh();
+		
+		Student student1 = (Student) annotationContext.getBean(Student.class);
 		
 		StringBuilder texto = new StringBuilder();
 		texto.append(student1.getIdStudent());
@@ -27,26 +31,6 @@ public class Principal {
 		texto.append(student1.getAddress().getStreet());
 		
 		System.out.println(texto);
-		
-		
-		
-		Student student2 = (Student) context.getBean("studentConst");
-		
-		StringBuilder texto2 = new StringBuilder();
-		texto2.append(student1.getIdStudent());
-		texto2.append(" , ");
-		texto2.append(student1.getName());
-		texto2.append(" , ");
-		texto2.append(student1.getSurname());
-		texto2.append(" , ");
-		texto2.append(student1.getAge());
-		texto2.append(" , ");
-		texto2.append(student1.getAddress().getIdAddress());
-		texto2.append(" , ");
-		texto2.append(student1.getAddress().getStreet());
-		
-		System.out.println(texto2);
-		
 		
 	}
 

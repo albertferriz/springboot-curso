@@ -1,8 +1,13 @@
-package com.privalia.entity;
+package com.privalia.entity.annotations;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
+@Component (value="student")
+@PropertySource ("classpath:config.properties")
 public class Student {
 	
 	protected int idStudent;
@@ -12,8 +17,17 @@ public class Student {
 	protected Address address;
 	
 	public Student(){}
-	
-	public Student(int idStudent, String name, String surname, int age, Address address) {
+	/*
+	 * Este constructor leera los parametros del fichero de properties
+	 */
+	@Autowired
+	public Student(
+			@Value("${student.idstudent}") int idStudent, 
+			@Value("${student.name}") String name, 
+			@Value("${student.surname}") String surname, 
+			@Value("${student.age}") int age, 
+			@Qualifier("address") Address address) 
+	{
 		this.idStudent = idStudent;
 		this.name = name;
 		this.surname = surname;

@@ -11,19 +11,33 @@
 		<constructor-arg index="0" value="Hola Mundo From Constructor!" type="java.lang.String" />
 	</bean>
 	
+	<bean id="address" class="com.privalia.entity.Address">
+		<constructor-arg index="0" value="1" type="int"/>
+		<constructor-arg index="1" value="nombdre de la calle" type="java.lang.String"/>
+	</bean>
+	
 	<bean id="studentSetter" class="com.privalia.entity.Student">
 		<property name="name" value="Albert"></property>
-		<property name="surname" value="F"></property>
+		<property name="surname" value="FFFF"></property>
 		<property name="age" value="33"></property>
 		<property name="address">
-			<bean id="addressConst" class="com.privalia.entity.Address"></bean>
+			<ref bean="address"/>
 		</property>
 	</bean>
 	
 	<bean id="studentConst" class="com.privalia.entity.Student">
-		<constructor-arg index="0" value="Albert" type="java.lang.String"/>
-		<constructor-arg index="1" value="Ferriz" type="java.lang.String"/>
-		<constructor-arg index="2" value="33" type="int"/>
+		<constructor-arg index="0" value="${student.idstudent}" type="int"/>
+		<constructor-arg index="1" value="${student.name}" type="java.lang.String"/>
+		<constructor-arg index="2" value="${student.surname}" type="java.lang.String"/>
+		<constructor-arg index="3" value="${student.age}" type="int"/>
+		<constructor-arg index="4" ref="address" />
+	</bean>
+	
+	<!-- Para leer configuraciones de un fichero de properties  -->
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+			<value>config.properties</value>
+		</property>
 	</bean>
 	
 </beans>
