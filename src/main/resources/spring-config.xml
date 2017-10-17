@@ -40,4 +40,35 @@
 		</property>
 	</bean>
 	
+	<!-- ********* -->
+	
+	<bean id="teacher1" class="com.privalia.entity.listas.Teacher">
+		<property name="name" value="NombreDeProfesor1"/>
+		<property name="id" value="1"/>
+	</bean>
+	
+	<bean id="teacher2" class="com.privalia.entity.listas.Teacher">
+		<property name="name" value="NombreDeProfesor2"/>
+		<property name="id" value="2" />
+	</bean>
+	
+	<bean id="teacher3" class="com.privalia.entity.listas.Teacher">
+		<property name="name" value="NombreDeProfesor3"/>
+		<property name="id" value="3"/>
+	</bean>
+	
+	<bean id="StudentWithTeachers" class="com.privalia.entity.listas.Student">
+		<constructor-arg index="0" value="${student.idstudent}" type="int"/>
+		<constructor-arg index="1" value="${student.name}" type="java.lang.String"/>
+		<constructor-arg index="2" value="${student.surname}" type="java.lang.String"/>
+		<constructor-arg index="3" value="${student.age}" type="int"/>
+		<constructor-arg index="4">
+			<list>
+				<ref bean="teacher1"></ref>
+				<ref bean="teacher2"></ref>
+				<ref bean="teacher3"></ref>
+			</list>
+		</constructor-arg>
+	</bean>
+	
 </beans>
