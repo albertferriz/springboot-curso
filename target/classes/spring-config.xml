@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		
+		">
 
 	<bean id="helloWorld" class="com.privalia.presentation.HelloWorld">
 		<property name="hello" value="¡HolaMuno!"></property>
@@ -70,5 +74,26 @@
 			</list>
 		</constructor-arg>
 	</bean>
+	
+	<!-- ************* -->
+	<bean id="compra" class="com.privalia.aspectos.Comprar"/>
+
+	<bean id="validarCompra" class="com.privalia.aspectos.ValidarMaterial"/>
+	<aop:config>
+		<aop:aspect ref="validarCompra">
+			<aop:pointcut expression="execution( * com.privalia.aspectos.Comprar.compra(..) )" id="compraPoinCut"/>
+
+			<!-- Antes de comprar comprobamos la cantidad -->
+			<aop:before pointcut-ref="compraPoinCut" method="comprobarCantidad"/>
+
+			<!-- Despues si todo va bien, lo empaquetamos -->
+			<aop:after-returning pointcut-ref="compraPoinCut" method="empaquetar"/>
+
+			<!-- En caso de error, ponemos una reclamacion -->
+			<aop:after-throwing pointcut-ref="compraPoinCut" method="ponerReclamacion"/>
+		</aop:aspect>
+	</aop:config>
+	
+	
 	
 </beans>
